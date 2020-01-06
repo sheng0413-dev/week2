@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuyongsheng.mapper.CompluMapper">
+	
+	<insert id="save">
+		insert into col(id,guan,maio,name,zhu,address,ben,cheng,checks) 
+		values(#{id},#{guan},#{maio},#{name},#{zhu},#{address},#{ben},#{cheng},#{checks})
+	</insert>
+	
+	<select id="all" resultType="com.liuyongsheng.pojo.Complu">
+		select * from col
+		<where>
+			<if test="id != null and id!=''">
+				and id like concat('%',#{id},'%')
+			</if>
+			<if test="guan != null and guan!=''">
+				and guan like concat('%',#{guan},'%')
+			</if>
+			<if test="maio != null and maio!=''">
+				and maio like concat('%',#{maio},'%')
+			</if>
+			<if test="name != null and name!=''">
+				and name like concat('%',#{name},'%')
+			</if>
+			<if test="maxben != null">
+				<![CDATA[
+					and ben <= #{maxben}
+				]]>
+			</if>
+			<if test="minben != null">
+				<![CDATA[
+					and ben >= #{minben}
+				]]>
+			</if>
+			<if test="zhu != null and zhu!=''">
+				and zhu like concat('%',#{zhu},'%')
+			</if>
+			<if test="address != null and address!=''">
+				and address like concat('%',#{address},'%')
+			</if>
+			<if test="maxcheng != null">
+				<![CDATA[
+					and cheng <= #{maxcheng}
+				]]>
+			</if>
+			<if test="mincheng != null">
+				<![CDATA[
+					and cheng >= #{mincheng}
+				]]>
+			</if>
+			<if test="maxnain != null">
+				<![CDATA[
+					and nain <= #{maxnain}
+				]]>
+			</if>
+			<if test="minnain != null">
+				<![CDATA[
+					and nain >= #{minnain}
+				]]>
+			</if>
+			<if test="checks != null and checks!=''">
+				and checks like concat('%',#{checks},'%')
+			</if>
+		</where>
+	</select>
+</mapper>
